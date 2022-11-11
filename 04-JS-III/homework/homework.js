@@ -46,7 +46,7 @@ function agregarItemAlComienzoDelArray(array, elemento) {
   // y devuelve el array
   // Pista: usa el método `.unshift`
   // Tu código:
-  array.shift(elemento);
+  array.unshift(elemento);
   return array;
 }
 
@@ -130,10 +130,11 @@ function multiplicarArgumentos(n) {
 function cuentoElementos(arreglo){
   //Realiza una función que retorne la cantidad de los elementos del arreglo cuyo valor es mayor a 18.
   //Escribe tu código aquí
-  if(arreglo.length<=18)
-    return false;
-  else 
-    return arreglo.length;
+  var n=0;
+  for(var i=0;i<arreglo.length;i++)
+    if(arreglo[i]>18)
+      n++;
+  return n;
 }
 
 
@@ -178,16 +179,28 @@ function mesesDelAño(array) {
   // "Enero", "Marzo" y "Noviembre", guardarlo en nuevo array y retornarlo.
   //Si alguno de los meses no está, devolver: "No se encontraron los meses pedidos"
   // Tu código:
-  var ref=["Enero","Marzo","Noviembre"],n=0,j;
-  for(var i=0;i<ref.length;i++)
-    for(j=0;j<array.length;j++)
-      if(array[j]===ref[i]){
-        n++;
-        j=array.length;
-      }
-  if(n>=ref.length)
-    return ref;
-  return "No se encontraron los meses pedidos";
+  var out=[],x=0,j=false,m=false,n=false;
+  for(var i=0;i<array.length;i++){
+    if(array[i]==="Enero" && j===false){
+      out[x]=array[i];
+      j=true;
+      x++;
+    }
+    if(array[i]==="Marzo" && m===false){
+      out[x]=array[i];
+      m=true;
+      x++;
+    }
+    if(array[i]==="Noviembre" && n===false){
+      out[x]=array[i];
+      n=true;
+      x++;
+    }
+  }
+  if(out.length===3)
+    return out;
+  else
+    return "No se encontraron los meses pedidos";
 }
 
 
@@ -214,12 +227,12 @@ function breakStatement(numero) {
   //Pista: usá el statement 'break'
   // Tu código:
   var array=[],n=0;
-  for(var i=5;i<15;i++){
-   if(array[n]===i)
+  for(var i=0;i<10;i++){
+   if((numero+2)===i)
       break;
     else{
-      array[n]=numero+2;
       numero+=2;
+      array[n]=numero;
       n++;
     }
   }
@@ -239,11 +252,11 @@ function continueStatement(numero) {
   // Tu código:
   var array=[],n=0;
   for(var i=0;i<10;i++){
-    if(array[n]==5)
+    if(i==5)
       continue;
     else{
-      array[n]=numero+2;
       numero+=2;
+      array[n]=numero;
       n++;
     }
   }
